@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do imóvel</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f3f4f6; font-family:Arial, sans-serif; color:#1f2937;">
+    <div style="max-width:680px; margin:0 auto; padding:32px 16px;">
+        <div style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,.08);">
+            <div style="background:#1d4ed8; padding:28px 32px; color:#ffffff;">
+                <p style="margin:0 0 8px; font-size:14px; opacity:.85;">Imobiliária</p>
+                <h1 style="margin:0; font-size:26px;">Olá, <span th:text="${cliente.nome}">Cliente</span>!</h1>
+            </div>
+
+            <div style="padding:32px;">
+                <p style="margin-top:0; line-height:1.6;" th:text="${mensagemImobiliaria}">
+                    Obrigado pelo seu interesse. Nossa equipe entrará em contato em breve.
+                </p>
+
+                <h2 style="margin:28px 0 16px; color:#1d4ed8;" th:text="${imovel.titulo}">Título do imóvel</h2>
+                <p style="line-height:1.6; color:#4b5563;" th:text="${imovel.descricao}">Descrição do imóvel</p>
+
+                <table style="width:100%; border-collapse:collapse; margin:24px 0;">
+                    <tr>
+                        <td style="padding:10px; background:#eff6ff;"><strong>Finalidade</strong></td>
+                        <td style="padding:10px; background:#eff6ff;" th:text="${imovel.finalidade}">Residencial</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><strong>Status</strong></td>
+                        <td style="padding:10px;" th:text="${imovel.status}">Disponível</td>
+                    </tr>
+                    <tr th:if="${imovel.precoVenda != null}">
+                        <td style="padding:10px; background:#eff6ff;"><strong>Preço de venda</strong></td>
+                        <td style="padding:10px; background:#eff6ff;" th:text="${#numbers.formatCurrency(imovel.precoVenda)}">R$ 0,00</td>
+                    </tr>
+                    <tr th:if="${imovel.precoAluguel != null}">
+                        <td style="padding:10px;"><strong>Preço do aluguel</strong></td>
+                        <td style="padding:10px;" th:text="${#numbers.formatCurrency(imovel.precoAluguel)}">R$ 0,00</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px; background:#eff6ff;"><strong>Endereço</strong></td>
+                        <td style="padding:10px; background:#eff6ff;">
+                            <span th:text="${imovel.endereco}">Rua</span>,
+                            <span th:text="${imovel.numero}">número</span>
+                            <span th:if="${imovel.complemento != null and !imovel.complemento.isBlank()}"
+                                  th:text="${' - ' + imovel.complemento}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;"><strong>Características</strong></td>
+                        <td style="padding:10px;" th:text="${imovel.caracteristicas}">Características</td>
+                    </tr>
+                </table>
+
+                <div style="border-left:4px solid #1d4ed8; background:#f9fafb; padding:16px 20px; margin-top:24px;">
+                    <p style="margin:0 0 8px;"><strong>Sua mensagem:</strong></p>
+                    <p style="margin:0; line-height:1.6; white-space:pre-line;" th:text="${cliente.mensagem}">Mensagem do cliente</p>
+                </div>
+
+                <p style="margin:24px 0 0; color:#4b5563; font-size:14px;">
+                    Entraremos em contato pelo telefone
+                    <strong th:text="${cliente.telefone}">(00) 00000-0000</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
